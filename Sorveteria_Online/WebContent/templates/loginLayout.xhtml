@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="login.css" />
+</h:head>
+
+<h:body>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="west">
+			<ui:insert name="menu" />
+		</p:layoutUnit>
+
+		<p:layoutUnit position="center">
+			<ui:insert name="conteudo" />
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

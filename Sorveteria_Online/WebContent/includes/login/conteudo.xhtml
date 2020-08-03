@@ -1,0 +1,84 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+	<h:form>
+		<p:dialog draggable="false" header="Login" modal="false"
+			visible="false" widgetVar="login">
+
+			<h:panelGrid columns="2" cellpadding="4" cellspacing="2">
+				<p:row>
+					<p:outputLabel value="Login: " />
+
+				</p:row>
+
+				<p:row>
+
+					<p:inputText value="#{usuarioBean.txtLogin}" />
+				</p:row>
+
+				<p:row>
+					<p:outputLabel value="Senha: " />
+
+				</p:row>
+
+				<p:row>
+
+					<p:inputText value="#{usuarioBean.txtSenha}" type="password" />
+				</p:row>
+
+				<p:row>
+					<p:commandLink value="Entrar" action="#{usuarioBean.entrar}"
+						update="@form" />
+
+				</p:row>
+			</h:panelGrid>
+
+		</p:dialog>
+
+
+
+		<p:dialog draggable="false" header="Cadastro" modal="false"
+			visible="false" widgetVar="cadastro">
+			<h:panelGrid columns="2" cellpadding="4" cellspacing="2">
+				<p:row>
+					<p:outputLabel value="Nome: " />
+				</p:row>
+
+				<p:row>
+					<p:inputText value="#{usuarioBean.usuario.nome}" />
+				</p:row>
+
+				<p:row>
+					<p:outputLabel value="Login: " />
+				</p:row>
+
+				<p:row>
+					<p:inputText value="#{usuarioBean.usuario.login}" />
+				</p:row>
+
+				<p:row>
+					<p:outputLabel value="Senha: " />
+				</p:row>
+
+				<p:row>
+					<p:inputText value="#{usuarioBean.usuario.senha}" type="password" />
+				</p:row>
+
+				<p:row>
+					<p:commandButton value="Cadastro"
+						actionListener="#{usuarioBean.salvar}" update="@form" />
+				</p:row>
+
+			</h:panelGrid>
+
+
+		</p:dialog>
+
+	</h:form>
+
+
+</ui:component>
