@@ -24,6 +24,9 @@ public class PedidoBean implements Serializable {
 	private Sorvete sorvete;
 	private List<Calda> caldas;
 	private List<Sabor> sabores;
+	private String nomeCalda;
+	private String nomeSabor;
+	private int numQtd;
 
 	private PedidoCRUD<Pedido, Sorvete, Sabor, Calda> pedidoDAO;
 
@@ -54,6 +57,47 @@ public class PedidoBean implements Serializable {
 		this.pedido.getSorvetes().add(this.sorvete);
 		this.sorvete = new Sorvete(new Calda(), new Sabor(), this.sorvete.getQuantidade());
 
+	}
+
+	public String remover() {
+		Sorvete encontrado = null;
+		for (Sorvete procurar : this.pedido.getSorvetes()) {
+			if (procurar.getCalda().getNome().equals(this.nomeCalda)
+					&& procurar.getSabor().getNome().equals(this.nomeSabor)
+					&& procurar.getQuantidade() == this.numQtd) {
+				encontrado = procurar;
+			}
+		}
+		
+		if(encontrado != null) {
+			this.pedido.getSorvetes().remove(encontrado);
+		}
+
+		return "";
+	}
+
+	public int getNumQtd() {
+		return numQtd;
+	}
+
+	public void setNumQtd(int numQtd) {
+		this.numQtd = numQtd;
+	}
+
+	public String getNomeCalda() {
+		return nomeCalda;
+	}
+
+	public void setNomeCalda(String nomeCalda) {
+		this.nomeCalda = nomeCalda;
+	}
+
+	public String getNomeSabor() {
+		return nomeSabor;
+	}
+
+	public void setNomeSabor(String nomeSabor) {
+		this.nomeSabor = nomeSabor;
 	}
 
 	public Pedido getPedido() {

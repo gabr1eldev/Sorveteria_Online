@@ -29,7 +29,7 @@
 
 					</h:panelGrid>
 
-					<h:panelGrid columns="7" >
+					<h:panelGrid columns="7">
 						<p:row>
 							<p:outputLabel value="Sorvete: " />
 						</p:row>
@@ -79,6 +79,26 @@
 							<p:column headerText="Bolas">
 								<h:outputText value="#{s.quantidade}" />
 							</p:column>
+
+							<p:column headerText="">
+								<p:commandButton icon="pi pi-trash" update="@form"
+									action="#{PedidoBean.remover}">
+
+									<f:setPropertyActionListener value="#{s.sabor.nome}"
+										target="#{PedidoBean.nomeSabor}" />
+
+									<f:setPropertyActionListener value="#{s.calda.nome}"
+										target="#{PedidoBean.nomeCalda}" />
+
+									<f:setPropertyActionListener value="#{s.quantidade}"
+										target="#{PedidoBean.numQtd}" />
+
+								</p:commandButton>
+
+							</p:column>
+
+
+
 						</p:dataTable>
 					</h:panelGrid>
 				</h:panelGrid>
@@ -98,7 +118,6 @@
 						<p:commandButton value="Pesquisar" />
 					</p:row>
 				</h:panelGrid>
-
 			</h:panelGrid>
 		</p:fieldset>
 
