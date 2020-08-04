@@ -8,6 +8,10 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 		<class>br.com.sorveteria.entity.Usuario</class>
+		<class>br.com.sorveteria.entity.Pedido</class>
+		<class>br.com.sorveteria.entity.Sorvete</class>
+		<class>br.com.sorveteria.entity.Sabor</class>
+		<class>br.com.sorveteria.entity.Calda</class>
 
 
 		<properties>

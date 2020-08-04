@@ -17,11 +17,11 @@ public class UsuarioDAO implements UsuarioCRUD<Usuario> {
 	}
 
 	@Override
-	public void salvar(Usuario entity) {
+	public void salvar(Usuario usuario) {
 
 		try {
 			Factory.getConnection().getTransaction().begin();
-			Factory.getConnection().persist(entity);
+			Factory.getConnection().persist(usuario);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -34,6 +34,7 @@ public class UsuarioDAO implements UsuarioCRUD<Usuario> {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> listar() {
 		List<Usuario> lista = null;

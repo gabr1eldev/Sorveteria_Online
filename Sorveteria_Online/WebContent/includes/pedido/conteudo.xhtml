@@ -1,0 +1,106 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+	<h:form>
+		<p:fieldset legend="Pedido">
+			<h:panelGrid style="width:100%" columns="2">
+
+				<h:panelGrid>
+					<h:panelGrid columns="4" cellpadding="4" cellspacing="5">
+						<p:row>
+							<p:outputLabel value="Nome: " />
+						</p:row>
+
+						<p:row>
+							<p:inputText value="#{PedidoBean.pedido.cliente}" />
+						</p:row>
+
+						<p:row>
+							<p:outputLabel value="Data: " />
+						</p:row>
+
+						<p:row>
+							<p:outputLabel value="#{PedidoBean.pedido.dataPedido}" />
+						</p:row>
+
+					</h:panelGrid>
+
+					<h:panelGrid columns="7" >
+						<p:row>
+							<p:outputLabel value="Sorvete: " />
+						</p:row>
+
+						<p:row>
+							<p:selectOneMenu value="#{PedidoBean.sorvete.sabor.nome}">
+								<f:selectItem itemLabel="Sabor" itemValue="" />
+								<f:selectItems value="#{PedidoBean.sabores}" var="sabores"
+									itemLabel="#{sabores.nome}" itemValue="#{sabores.nome}" />
+
+							</p:selectOneMenu>
+						</p:row>
+
+						<p:row>
+							<p:outputLabel value="Calda: " />
+						</p:row>
+
+						<p:row>
+							<p:selectOneMenu value="#{PedidoBean.sorvete.calda.nome}">
+								<f:selectItem itemLabel="Calda" itemValue="" />
+								<f:selectItems value="#{PedidoBean.caldas}" var="caldas"
+									itemLabel="#{caldas.nome}" itemValue="#{caldas.nome}" />
+							</p:selectOneMenu>
+						</p:row>
+
+						<p:row>
+							<p:outputLabel value="Bolas: " />
+						</p:row>
+
+						<p:row>
+							<p:inputNumber value="#{PedidoBean.sorvete.quantidade}" />
+						</p:row>
+
+
+
+					</h:panelGrid>
+					<h:panelGrid>
+						<p:dataTable var="s" value="#{PedidoBean.pedido.sorvetes}">
+							<p:column headerText="Sabor">
+								<h:outputText value="#{s.sabor.nome}" />
+							</p:column>
+
+							<p:column headerText="Calda">
+								<h:outputText value="#{s.calda.nome}" />
+							</p:column>
+
+							<p:column headerText="Bolas">
+								<h:outputText value="#{s.quantidade}" />
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+				</h:panelGrid>
+
+				<h:panelGrid>
+					<p:row>
+						<p:commandButton value="Adicionar"
+							actionListener="#{PedidoBean.adicionarPedido}" update="@form" />
+					</p:row>
+
+					<p:row>
+						<p:commandButton value="Salvar"
+							actionListener="#{PedidoBean.salvarPedido}" update="@form" />
+					</p:row>
+
+					<p:row>
+						<p:commandButton value="Pesquisar" />
+					</p:row>
+				</h:panelGrid>
+
+			</h:panelGrid>
+		</p:fieldset>
+
+	</h:form>
+</ui:component>
