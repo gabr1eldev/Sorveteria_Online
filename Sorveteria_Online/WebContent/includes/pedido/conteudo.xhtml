@@ -4,7 +4,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-
+	<p:growl id="message" />
 	<h:form>
 		<p:fieldset legend="Pedido">
 			<h:panelGrid style="width:100%" columns="2">
@@ -106,12 +106,12 @@
 				<h:panelGrid>
 					<p:row>
 						<p:commandButton value="Adicionar"
-							actionListener="#{PedidoBean.adicionarPedido}" update="@form" />
+							actionListener="#{PedidoBean.adicionarPedido}" update="@form :message" />
 					</p:row>
 
 					<p:row>
 						<p:commandButton value="Salvar"
-							actionListener="#{PedidoBean.salvarPedido}" update="@form" />
+							actionListener="#{PedidoBean.salvarPedido}" update="@form :message" />
 					</p:row>
 
 					<p:row>

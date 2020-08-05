@@ -10,6 +10,7 @@ import javax.faces.bean.RequestScoped;
 
 import br.com.sorveteria.CRUD.PedidoCRUD;
 import br.com.sorveteria.DAO.PedidoDAO;
+import br.com.sorveteria.Util.Faces;
 import br.com.sorveteria.entity.Calda;
 import br.com.sorveteria.entity.Pedido;
 import br.com.sorveteria.entity.Sabor;
@@ -27,7 +28,7 @@ public class PedidoBean implements Serializable {
 	private String nomeCalda;
 	private String nomeSabor;
 	private int numQtd;
-
+	private Faces faces;
 	private PedidoCRUD<Pedido, Sorvete, Sabor, Calda> pedidoDAO;
 
 	public PedidoBean() {
@@ -40,6 +41,7 @@ public class PedidoBean implements Serializable {
 		this.sorvete = new Sorvete();
 		this.sorvete.setCalda(new Calda());
 		this.sorvete.setSabor(new Sabor());
+		this.faces = new Faces();
 
 		this.caldas = this.pedidoDAO.listarCalda();
 		this.sabores = this.pedidoDAO.listarSabor();
@@ -47,15 +49,40 @@ public class PedidoBean implements Serializable {
 	}
 
 	public void salvarPedido() {
-		this.pedidoDAO.salvarPedido(this.pedido);
-		this.pedido = new Pedido(this.pedido.getCliente(), new Date(), new ArrayList<Sorvete>());
-
+		if (this.pedido.getSorvetes().isEmpty()) {
+			this.faces.msgError("Você precisa Adicionar primeiro!");
+		} else {
+			this.pedidoDAO.salvarPedido(this.pedido);
+			this.pedido = new Pedido(this.pedido.getCliente(), new Date(), new ArrayList<Sorvete>());
+			this.faces.msgInfor("Salvo com Sucesso!");
+		}
 	}
 
 	public void adicionarPedido() {
-		this.sorvete.setPedido(this.pedido);
-		this.pedido.getSorvetes().add(this.sorvete);
-		this.sorvete = new Sorvete(new Calda(), new Sabor(), this.sorvete.getQuantidade());
+		Sorvete sorv = null;
+		if (this.pedido.getCliente().isEmpty() || this.sorvete.getCalda().getNome().isEmpty()
+				|| this.sorvete.getSabor().getNome().isEmpty() || this.sorvete.getQuantidade() == 0) {
+			this.faces.msgError("Preencha todos os Campos!");
+		} else {
+			this.sorvete.setPedido(this.pedido);
+
+			if (this.sorvete.getCalda().getNome().equals(this.sorvete.getSabor().getNome())) {
+				this.faces.msgError("Sabor e Calda Iguais! troque a calda!!!");
+			} else {
+				for (Sorvete verificar : this.pedido.getSorvetes()) {
+					if (verificar.getSabor().getNome().equals(this.sorvete.getCalda().getNome())) {
+						sorv = verificar;
+					}
+				}
+				if (sorv != null) {
+					this.faces.msgError("Sabor e Calda Iguais,troque a calda!!!");
+				} else {
+					this.pedido.getSorvetes().add(this.sorvete);
+					this.sorvete = new Sorvete(new Calda(), new Sabor(), this.sorvete.getQuantidade());
+				}
+
+			}
+		}
 
 	}
 
@@ -68,12 +95,20 @@ public class PedidoBean implements Serializable {
 				encontrado = procurar;
 			}
 		}
-		
-		if(encontrado != null) {
+
+		if (encontrado != null) {
 			this.pedido.getSorvetes().remove(encontrado);
 		}
 
 		return "";
+	}
+
+	public Faces getFaces() {
+		return faces;
+	}
+
+	public void setFaces(Faces faces) {
+		this.faces = faces;
 	}
 
 	public int getNumQtd() {
