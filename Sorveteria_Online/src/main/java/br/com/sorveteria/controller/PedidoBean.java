@@ -34,6 +34,7 @@ public class PedidoBean implements Serializable {
 	private Faces faces;
 	private String label;
 	private Usuario logIn;
+	private Long idPedido;
 	private PedidoCRUD<Pedido, Sorvete, Sabor, Calda> pedidoDAO;
 
 	public PedidoBean() {
@@ -112,6 +113,14 @@ public class PedidoBean implements Serializable {
 		}
 
 		return "";
+	}
+
+	public Long getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(Long idPedido) {
+		this.idPedido = idPedido;
 	}
 
 	public Usuario getLogIn() {

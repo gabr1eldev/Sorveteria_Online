@@ -60,6 +60,7 @@ insert into calda(nome) values('CHOCOLATE');
 insert into calda(nome) values('UVA');
 insert into calda(nome) values('CARAMELO');
 insert into calda(nome) values('BAUNILHA');
+insert into calda(nome) values('Sem Calda');
 
 select * from pedido;
 
