@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import br.com.sorveteria.CRUD.PedidoCRUD;
 import br.com.sorveteria.DAO.PedidoDAO;
@@ -15,6 +17,7 @@ import br.com.sorveteria.entity.Calda;
 import br.com.sorveteria.entity.Pedido;
 import br.com.sorveteria.entity.Sabor;
 import br.com.sorveteria.entity.Sorvete;
+import br.com.sorveteria.entity.Usuario;
 
 @ManagedBean(name = "PedidoBean")
 @RequestScoped
@@ -29,6 +32,8 @@ public class PedidoBean implements Serializable {
 	private String nomeSabor;
 	private int numQtd;
 	private Faces faces;
+	private String label;
+	private Usuario logIn;
 	private PedidoCRUD<Pedido, Sorvete, Sabor, Calda> pedidoDAO;
 
 	public PedidoBean() {
@@ -46,6 +51,12 @@ public class PedidoBean implements Serializable {
 		this.caldas = this.pedidoDAO.listarCalda();
 		this.sabores = this.pedidoDAO.listarSabor();
 
+	}
+
+	public void usuarioLogado() {
+		HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		this.logIn = (Usuario) sessao.getAttribute("logIn");
+		this.label = this.logIn.getNome();
 	}
 
 	public void salvarPedido() {
@@ -101,6 +112,22 @@ public class PedidoBean implements Serializable {
 		}
 
 		return "";
+	}
+
+	public Usuario getLogIn() {
+		return logIn;
+	}
+
+	public void setLogIn(Usuario logIn) {
+		this.logIn = logIn;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 	public Faces getFaces() {

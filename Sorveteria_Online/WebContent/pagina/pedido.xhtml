@@ -5,7 +5,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/templates/pedidoLayout.xhtml">
 
-	
+
+
+	<ui:define name="funcionario">
+		<ui:include src="/includes/pedido/funcionario.xhtml" />
+	</ui:define>
+
 
 	<ui:define name="conteudo">
 		<ui:include src="/includes/pedido/conteudo.xhtml" />
