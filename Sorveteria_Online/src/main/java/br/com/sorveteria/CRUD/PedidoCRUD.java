@@ -13,6 +13,8 @@ public interface PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 	void excluidPedido(Pedido pedido);
 	
 	void excluirSorvete(Sorvete sorvete);
+	
+	Pedido pesquisar(Long id);
 
 	List<Pedido> listarPedido();
 

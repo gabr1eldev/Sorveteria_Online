@@ -95,6 +95,15 @@
 
 								</p:commandButton>
 
+								<p:column headerText="">
+									<p:commandButton icon="pi pi-pencil" title="editar"
+										action="#{PedidoBean.editar}" update="@form">
+										<f:setPropertyActionListener value="#{s.sabor.nome}"
+											target="#{PedidoBean.idPedido}" />
+									</p:commandButton>
+
+								</p:column>
+
 							</p:column>
 
 
@@ -106,12 +115,14 @@
 				<h:panelGrid>
 					<p:row>
 						<p:commandButton value="Adicionar"
-							actionListener="#{PedidoBean.adicionarPedido}" update="@form :message" />
+							actionListener="#{PedidoBean.adicionarPedido}"
+							update="@form :message" />
 					</p:row>
 
 					<p:row>
 						<p:commandButton value="Salvar"
-							actionListener="#{PedidoBean.salvarPedido}" update="@form :message" />
+							actionListener="#{PedidoBean.salvarPedido}"
+							update="@form :message" />
 					</p:row>
 
 					<p:row>

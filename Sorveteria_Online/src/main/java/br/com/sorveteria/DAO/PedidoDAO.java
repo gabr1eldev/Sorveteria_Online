@@ -117,4 +117,10 @@ public class PedidoDAO implements PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 		return lista;
 	}
 
+	@Override
+	public Pedido pesquisar(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -115,6 +115,16 @@ public class PedidoBean implements Serializable {
 		return "";
 	}
 
+	
+
+	public void pesquisar() {
+
+	}
+
+	public String editar() {
+		return "";
+	}
+
 	public Long getIdPedido() {
 		return idPedido;
 	}
