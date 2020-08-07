@@ -115,8 +115,6 @@ public class PedidoBean implements Serializable {
 		return "";
 	}
 
-	
-
 	public void pesquisar() {
 
 	}

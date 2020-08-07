@@ -1,5 +1,6 @@
 package br.com.sorveteria.CRUD;
 
+import java.util.Date;
 import java.util.List;
 
 public interface PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
@@ -21,4 +22,6 @@ public interface PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 	List<Sabor> listarSabor();
 
 	List<Calda> listarCalda();
+	
+	List<Pedido> pesquisarPedido(Pedido pedido,Sorvete sorvete,Date dataInicio,Date dataFim);
 }

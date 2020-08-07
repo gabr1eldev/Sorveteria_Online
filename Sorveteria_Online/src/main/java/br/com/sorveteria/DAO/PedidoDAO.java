@@ -1,5 +1,6 @@
 package br.com.sorveteria.DAO;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.sorveteria.CRUD.PedidoCRUD;
@@ -119,8 +120,24 @@ public class PedidoDAO implements PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 
 	@Override
 	public Pedido pesquisar(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Pedido pedido = Factory.getConnection().find(Pedido.class, id);
+		return pedido;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Pedido> pesquisarPedido(Pedido pedido, Sorvete sorvete, Date dataInicio, Date dataFim) {
+		List<Pedido> lista = null;
+		try {
+
+			lista = Factory.getConnection().createQuery("select distinct p.* from Pedido p, Sorvete s").getResultList();
+			return lista;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lista;
 	}
 
 }
