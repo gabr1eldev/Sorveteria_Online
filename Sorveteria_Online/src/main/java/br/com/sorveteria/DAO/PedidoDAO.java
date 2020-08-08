@@ -1,5 +1,6 @@
 package br.com.sorveteria.DAO;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -120,7 +121,7 @@ public class PedidoDAO implements PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 
 	@Override
 	public Pedido pesquisar(Long id) {
-		
+
 		Pedido pedido = Factory.getConnection().find(Pedido.class, id);
 		return pedido;
 	}
@@ -138,6 +139,39 @@ public class PedidoDAO implements PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 			e.printStackTrace();
 		}
 		return lista;
+	}
+
+	@SuppressWarnings("unused")
+	private String wherePedido(Pedido pedido, Sorvete sorvete, Date dataInicio, Date dataFim) {
+		String where = "";
+		SimpleDateFormat dataSimples = new SimpleDateFormat("DD/MM/YYYY");
+
+		if (pedido.getCliente() != null && !pedido.getCliente().isEmpty()) {
+			where += "and upper(p.cliente) like upper('%" + pedido.getCliente() + "%')";
+		}
+
+		if (dataInicio != null && dataFim != null) {
+			where += " and p.dataPedido BETWEEN TO_DATE('" + dataSimples.format(dataInicio) + "', 'DD/MM/YYYY') and "
+					+ " TO_DATE('" + dataSimples.format(dataFim) + "', 'DD/MM/YYYY')";
+		}
+
+		if (sorvete.getSabor() != null && sorvete.getSabor().getNome() != null
+				&& !sorvete.getSabor().getNome().isEmpty()) {
+			where += " and s.sabor.nome = '" + sorvete.getSabor().getNome() + "'";
+		}
+
+		if (sorvete.getCalda() != null && sorvete.getCalda().getNome() != null
+				&& !sorvete.getCalda().getNome().isEmpty()) {
+			where += " and s.calda.nome = '" + sorvete.getCalda().getNome() + "'";
+		}
+
+		if (sorvete.getQuantidade() > 0) {
+			where += " and s.quantidade = " + sorvete.getQuantidade();
+		}
+
+		where += " order by p.dataPedido, p.cliente ASC ";
+
+		return where;
 	}
 
 }
