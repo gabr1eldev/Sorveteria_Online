@@ -132,7 +132,9 @@ public class PedidoDAO implements PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 		List<Pedido> lista = null;
 		try {
 
-			lista = Factory.getConnection().createQuery("select distinct p.* from Pedido p, Sorvete s").getResultList();
+			lista = Factory.getConnection().createQuery("select distinct p from Pedido p "
+					+ "LEFT JOIN p.sorvetes s where 1 = 1" + this.wherePedido(pedido, sorvete, dataInicio, dataFim))
+					.getResultList();
 			return lista;
 
 		} catch (Exception e) {
@@ -141,7 +143,6 @@ public class PedidoDAO implements PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 		return lista;
 	}
 
-	@SuppressWarnings("unused")
 	private String wherePedido(Pedido pedido, Sorvete sorvete, Date dataInicio, Date dataFim) {
 		String where = "";
 		SimpleDateFormat dataSimples = new SimpleDateFormat("DD/MM/YYYY");
@@ -169,7 +170,7 @@ public class PedidoDAO implements PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 			where += " and s.quantidade = " + sorvete.getQuantidade();
 		}
 
-		where += " order by p.dataPedido, p.cliente ASC ";
+		where += " order by p.dataPedido ASC ";
 
 		return where;
 	}

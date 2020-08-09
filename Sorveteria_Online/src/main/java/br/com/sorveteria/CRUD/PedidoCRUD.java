@@ -12,9 +12,9 @@ public interface PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 	void editarPedido(Pedido pedido);
 
 	void excluidPedido(Pedido pedido);
-	
+
 	void excluirSorvete(Sorvete sorvete);
-	
+
 	Pedido pesquisar(Long id);
 
 	List<Pedido> listarPedido();
@@ -22,6 +22,6 @@ public interface PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 	List<Sabor> listarSabor();
 
 	List<Calda> listarCalda();
-	
-	List<Pedido> pesquisarPedido(Pedido pedido,Sorvete sorvete,Date dataInicio,Date dataFim);
+
+	List<Pedido> pesquisarPedido(Pedido pedido, Sorvete sorvete, Date dataInicio, Date dataFim);
 }

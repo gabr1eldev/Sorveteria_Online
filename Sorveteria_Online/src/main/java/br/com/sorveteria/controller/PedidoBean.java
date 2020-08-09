@@ -35,6 +35,8 @@ public class PedidoBean implements Serializable {
 	private String label;
 	private Usuario logIn;
 	private Long idPedido;
+	private Date dataInicio, dataFim;
+	private List<Pedido> listaPedido;
 	private PedidoCRUD<Pedido, Sorvete, Sabor, Calda> pedidoDAO;
 
 	public PedidoBean() {
@@ -48,6 +50,7 @@ public class PedidoBean implements Serializable {
 		this.sorvete.setCalda(new Calda());
 		this.sorvete.setSabor(new Sabor());
 		this.faces = new Faces();
+		this.usuarioLogado();
 
 		this.caldas = this.pedidoDAO.listarCalda();
 		this.sabores = this.pedidoDAO.listarSabor();
@@ -57,7 +60,7 @@ public class PedidoBean implements Serializable {
 	public void usuarioLogado() {
 		HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		this.logIn = (Usuario) sessao.getAttribute("logIn");
-		this.label = this.logIn.getNome();
+		this.label = logIn.getNome();
 	}
 
 	public void salvarPedido() {
@@ -116,11 +119,35 @@ public class PedidoBean implements Serializable {
 	}
 
 	public void pesquisar() {
-
+		this.listaPedido = this.pedidoDAO.pesquisarPedido(this.pedido, this.sorvete, this.dataInicio, this.dataFim);
 	}
 
 	public String editar() {
 		return "";
+	}
+
+	public List<Pedido> getListaPedido() {
+		return listaPedido;
+	}
+
+	public void setListaPedido(List<Pedido> listaPedido) {
+		this.listaPedido = listaPedido;
+	}
+
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public Date getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
 	}
 
 	public Long getIdPedido() {
