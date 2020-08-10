@@ -12,6 +12,7 @@ import br.com.sorveteria.entity.Pedido;
 import br.com.sorveteria.entity.Sabor;
 import br.com.sorveteria.entity.Sorvete;
 
+
 @ManagedBean
 @RequestScoped
 public class PesquisaBean implements Serializable {
