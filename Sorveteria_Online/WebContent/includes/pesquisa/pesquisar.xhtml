@@ -1,0 +1,106 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+	<h:form>
+		<h:panelGrid columns="2">
+
+			<h:panelGrid columns="4">
+				<p:row>
+					<p:outputLabel value="Nome: " />
+				</p:row>
+
+				<p:row>
+					<p:inputText value="#{PedidoBean.pedido.cliente}" />
+				</p:row>
+
+				<p:row>
+					<p:outputLabel value="Bolas: " />
+				</p:row>
+
+				<p:row>
+					<p:inputNumber value="#{PedidoBean.sorvete.quantidade}" />
+				</p:row>
+
+				<p:row>
+					<p:outputLabel value="Sorvete: " />
+				</p:row>
+
+				<p:row>
+					<p:selectOneMenu value="#{PedidoBean.sorvete.sabor.nome}">
+						<f:selectItem itemLabel="Sabor" itemValue="" />
+						<f:selectItems value="#{PedidoBean.sabores}" var="sabores"
+							itemLabel="#{sabores.nome}" itemValue="#{sabores.nome}" />
+
+					</p:selectOneMenu>
+				</p:row>
+
+				<p:row>
+					<p:outputLabel value="Calda: " />
+				</p:row>
+
+				<p:row>
+					<p:selectOneMenu value="#{PedidoBean.sorvete.calda.nome}">
+						<f:selectItem itemLabel="Calda" itemValue="" />
+						<f:selectItems value="#{PedidoBean.caldas}" var="caldas"
+							itemLabel="#{caldas.nome}" itemValue="#{caldas.nome}" />
+					</p:selectOneMenu>
+				</p:row>
+
+
+				<p:row>
+					<p:outputLabel value="DataInicio: " />
+				</p:row>
+
+				<p:row>
+					<p:calendar value="#{PedidoBean.dataInicio}" showOn="button"
+						pattern="dd/MM/yyyy" />
+				</p:row>
+
+				<p:row>
+					<p:outputLabel value="DataFim: " />
+				</p:row>
+
+				<p:row>
+					<p:calendar value="#{PedidoBean.dataFim}" showOn="button"
+						pattern="dd/MM/yyyy" />
+				</p:row>
+
+
+			</h:panelGrid>
+
+
+			<h:panelGrid>
+				<p:row>
+					<p:commandButton actionListener="#{PedidoBean.pesquisar}"
+						update="@form" value="Pesquisar" />
+				</p:row>
+
+				<p:row>
+					<p:commandButton value="Voltar" action="#{pesquisaBean.voltar}"
+						update="@form" />
+				</p:row>
+			</h:panelGrid>
+
+
+		</h:panelGrid>
+		<p:dataTable var="p" value="#{PedidoBean.listaPedido}">
+			<p:column headerText="ID">
+				<h:outputText value="#{p.id}" />
+			</p:column>
+
+			<p:column headerText="Cliente">
+				<h:outputText value="#{p.cliente}" />
+			</p:column>
+
+
+			<p:column headerText="Data">
+				<h:outputText value="#{p.dataPedido}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+</ui:component>
