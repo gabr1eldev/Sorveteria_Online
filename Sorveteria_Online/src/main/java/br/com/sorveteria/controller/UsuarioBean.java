@@ -42,11 +42,13 @@ public class UsuarioBean implements Serializable {
 				}
 			}
 			if (verificar) {
+				this.usuario = new Usuario();
 				this.faces.msgError("você já possui cadastro!");
 			} else {
 				this.usuarioDAO.salvar(novoUser);
 				this.faces.msgInfor("cadastrado com sucesso!");
 			}
+			this.usuario = new Usuario();
 		}
 	}
 

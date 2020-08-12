@@ -64,13 +64,16 @@ public class PedidoBean implements Serializable {
 	}
 
 	public void salvarPedido() {
-		if (this.pedido.getSorvetes().isEmpty()) {
+
+		if (this.pedido.getCliente().isEmpty() || this.pedido.getSorvetes() == null) {
 			this.faces.msgError("Você precisa Adicionar primeiro!");
+
 		} else {
 			this.pedidoDAO.salvarPedido(this.pedido);
 			this.pedido = new Pedido(this.pedido.getCliente(), new Date(), new ArrayList<Sorvete>());
 			this.faces.msgInfor("Salvo com Sucesso!");
 		}
+
 	}
 
 	public void adicionarPedido() {

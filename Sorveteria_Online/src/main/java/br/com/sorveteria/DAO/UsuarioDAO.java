@@ -34,7 +34,7 @@ public class UsuarioDAO implements UsuarioCRUD<Usuario> {
 
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	@Override
 	public List<Usuario> listar() {
 		List<Usuario> lista = null;
