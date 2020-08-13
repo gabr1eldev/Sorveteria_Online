@@ -122,11 +122,14 @@ public class PedidoBean implements Serializable {
 	}
 
 	public String paginaPesquisa() {
+		this.pedido = new Pedido();
+		this.sorvete = new Sorvete();
 		return "/pagina/pesquisar.xhtml?faces-redirect=true&amp;includeViewParams=true";
 	}
 
 	public void pesquisar() {
 		this.listaPedido = this.pedidoDAO.pesquisarPedido(this.pedido, this.sorvete, this.dataInicio, this.dataFim);
+
 	}
 
 	public String editar() {

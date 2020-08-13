@@ -86,21 +86,23 @@
 			</h:panelGrid>
 
 
+
+			<p:dataTable var="p" value="#{PedidoBean.listaPedido}">
+				<p:column headerText="ID">
+					<h:outputText value="#{p.id}" />
+				</p:column>
+
+				<p:column headerText="Cliente">
+					<h:outputText value="#{p.cliente}" />
+				</p:column>
+
+
+				<p:column headerText="Data">
+					<h:outputText value="#{p.dataPedido}" />
+				</p:column>
+
+			</p:dataTable>
+
 		</h:panelGrid>
-		<p:dataTable var="p" value="#{PedidoBean.listaPedido}">
-			<p:column headerText="ID">
-				<h:outputText value="#{p.id}" />
-			</p:column>
-
-			<p:column headerText="Cliente">
-				<h:outputText value="#{p.cliente}" />
-			</p:column>
-
-
-			<p:column headerText="Data">
-				<h:outputText value="#{p.dataPedido}" />
-			</p:column>
-
-		</p:dataTable>
 	</h:form>
 </ui:component>

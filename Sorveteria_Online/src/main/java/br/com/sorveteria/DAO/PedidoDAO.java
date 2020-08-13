@@ -58,7 +58,20 @@ public class PedidoDAO implements PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 
 	@Override
 	public void editarPedido(Pedido pedido) {
-		// TODO Auto-generated method stub
+
+		try {
+			Factory.getConnection().getTransaction().begin();
+			Pedido remover = Factory.getConnection().find(Pedido.class, pedido.getId());
+			Factory.getConnection().remove(remover);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Factory.getConnection().getTransaction().rollback();
+
+		} finally {
+			Factory.getConnection().getTransaction().commit();
+			Factory.getConnection().close();
+		}
 
 	}
 
@@ -145,10 +158,10 @@ public class PedidoDAO implements PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 
 	private String wherePedido(Pedido pedido, Sorvete sorvete, Date dataInicio, Date dataFim) {
 		String where = "";
-		SimpleDateFormat dataSimples = new SimpleDateFormat("DD/MM/YYYY");
+		SimpleDateFormat dataSimples = new SimpleDateFormat("dd/MM/yyyy");
 
 		if (pedido.getCliente() != null && !pedido.getCliente().isEmpty()) {
-			where += "and upper(p.cliente) like upper('%" + pedido.getCliente() + "%')";
+			where += " and upper(p.cliente) like upper('%" + pedido.getCliente() + "%')";
 		}
 
 		if (dataInicio != null && dataFim != null) {
@@ -170,9 +183,10 @@ public class PedidoDAO implements PedidoCRUD<Pedido, Sorvete, Sabor, Calda> {
 			where += " and s.quantidade = " + sorvete.getQuantidade();
 		}
 
-		where += " order by p.dataPedido ASC ";
+		where += " order by p.dataPedido, p.cliente ASC ";
 
 		return where;
+
 	}
 
 }
